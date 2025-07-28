@@ -5,15 +5,15 @@
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  min-height: auto;
+  box-sizing: border-box;
+  display: flex;
 }
 
 .hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
   color: var(--background-color);
+  margin-top: 0;
+  font-size: 32px;
 }
 
 .hero picture {
@@ -30,8 +30,36 @@
   height: 100%;
 }
 
+.hero > div:nth-of-type(2) {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero > div:nth-of-type(2) > div {
+  color: #fff;
+  max-width: 821px;
+  padding: 100px 24px 100px 24px;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 34, 68, 0.65);
+  border-radius: 4px;
+}
+
+.hero p {
+  font-size: 20px;
+}
+
 @media (width >= 900px) {
   .hero {
     padding: 40px 32px;
+    min-height: 600px;
+  }
+
+  .hero > div:nth-of-type(2) > div {
+    padding: 24px 28px 24px 25px;
+    margin-bottom: 1rem;
   }
 }
