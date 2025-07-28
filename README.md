@@ -1,9 +1,8 @@
-# Your Project's Title...
-Your project's description...
+# United Airlines
 
 ## Environments
-- Preview: https://main--{repo}--{owner}.aem.page/
-- Live: https://main--{repo}--{owner}.aem.live/
+- Preview: https://main--united-airlines--adobedevxsc.aem.page/
+- Live: https://main--united-airlines--adobedevxsc.aem.live/
 
 ## Documentation
 
