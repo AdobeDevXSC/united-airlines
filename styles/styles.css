@@ -262,4 +262,11 @@ main .section.highlight {
 
 main .section.blog > div {
   border-bottom: 1px solid #979797;
+  padding: 0 24px 2rem;
+}
+
+@media (width >= 900px) {
+  main .section.blog > div {
+    padding: 0 0 2rem 0;
+  }
 }
