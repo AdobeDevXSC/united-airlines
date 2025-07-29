@@ -26,6 +26,12 @@ function updateActiveSlide(slide) {
       indicator.querySelector('button').setAttribute('disabled', 'true');
     }
   });
+
+  // Update the slide counter
+  const counter = block.querySelector('.carousel-navigation-buttons span');
+  if (counter) {
+    counter.textContent = `${slideIndex + 1}/${slides.length}`;
+  }
 }
 
 function showSlide(block, slideIndex = 0) {
@@ -78,7 +84,28 @@ function createSlide(row, slideIndex, carouselId) {
   slide.classList.add('carousel-slide');
 
   row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
-    column.classList.add(`carousel-slide-${colIdx === 0 ? 'image' : 'content'}`);
+    const isContent = colIdx !== 0;
+    const className = `carousel-slide-${isContent ? 'content' : 'image'}`;
+    column.classList.add(className);
+
+    if (isContent) {
+      // Look for the first heading element inside the column
+      const heading = column.querySelector('h1, h2, h3, h4, h5, h6');
+      if (heading) {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('wrapper');
+
+        let next = heading.nextElementSibling;
+        while (next) {
+          const toMove = next;
+          next = next.nextElementSibling;
+          wrapper.appendChild(toMove);
+        }
+
+        column.appendChild(wrapper);
+      }
+    }
+
     slide.append(column);
   });
 
@@ -119,7 +146,8 @@ export default async function decorate(block) {
     const slideNavButtons = document.createElement('div');
     slideNavButtons.classList.add('carousel-navigation-buttons');
     slideNavButtons.innerHTML = `
-      <button type="button" class= "slide-prev" aria-label="Previous Slide"></button>
+      <button type="button" class="slide-prev" aria-label="Previous Slide"></button>
+      <span>1/${rows.length}</span>
       <button type="button" class="slide-next" aria-label="Next Slide"></button>
     `;
 
@@ -140,10 +168,12 @@ export default async function decorate(block) {
     row.remove();
   });
 
-  container.append(slidesWrapper);
+  container.prepend(slidesWrapper);
   block.prepend(container);
 
   if (!isSingleSlide) {
     bindEvents(block);
+    // Initialize the active slide
+    block.dataset.activeSlide = '0';
   }
 }
