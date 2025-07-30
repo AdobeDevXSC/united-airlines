@@ -12,6 +12,19 @@ import {
   loadCSS,
 } from './aem.js';
 
+export function isAuthorEnvironment() {
+  if(window?.location?.origin?.includes('author')){
+    return true;
+  }else{
+    return false;
+  }
+  /*
+  if(document.querySelector('*[data-aue-resource]') !== null){
+    return true;
+  }*/
+  //return false;
+}
+
 /**
  * Moves all the attributes from a given elmenet to another given element.
  * @param {Element} from the element to copy attributes from
