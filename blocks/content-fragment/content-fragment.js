@@ -10,18 +10,18 @@ export default async function decorate(block) {
   const CONFIG = {
     WRAPPER_SERVICE_URL: 'https://prod-31.westus.logic.azure.com:443/workflows/2660b7afa9524acbae379074ae38501e/triggers/manual/paths/invoke',
     WRAPPER_SERVICE_PARAMS: 'api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=kfcQD5S7ovej9RHdGZFVfgvA-eEqNlb6r_ukuByZ64o',
-    GRAPHQL_QUERY: '/graphql/execute.json/united-airlines/CTAByPath',
+    GRAPHQL_QUERY: '/graphql/execute.json/wknd-universal/CTAByPath',
     EXCLUDED_THEME_KEYS: new Set(['brandSite', 'brandLogo'])
   };
 	
-	const hostname = getMetadata('hostname') || 'https://author-p128727-e1256870.adobeaemcloud.com/';	
+	const hostname = getMetadata('hostname');	
   const aemauthorurl = getMetadata('authorurl') || '';
 	
   const aempublishurl = hostname?.replace('author', 'publish')?.replace(/\/$/, '');  
 	
 	//const aempublishurl = getMetadata('publishurl') || '';
 	
-  const persistedquery = '/graphql/execute.json/united-airlines/CTAByPath';
+  const persistedquery = '/graphql/execute.json/wknd-universal/CTAByPath';
   const contentPath = block.querySelector(':scope div:nth-child(1) > div a')?.textContent?.trim();
   const variationname = block.querySelector(':scope div:nth-child(2) > div')?.textContent?.trim()?.toLowerCase()?.replace(' ', '_') || 'master';
   block.innerHTML = '';
@@ -98,10 +98,8 @@ export default async function decorate(block) {
 
         block.innerHTML = `
         <div class='banner-content block' data-aue-resource=${itemId} data-aue-label="Offer Content fragment" data-aue-type="reference" data-aue-filter="contentfragment">
-          <div class='banner-detail' style="background-image: linear-gradient(90deg,rgba(0,0,0,0.6), rgba(0,0,0,0.1) 80%) ,url(${
-            imgUrl
-          });" data-aue-prop="bannerimage" data-aue-label="Main Image" data-aue-type="media" >
-                <p data-aue-prop="title" data-aue-label="Title" data-aue-type="text" class='cftitle'>${
+          <div class='banner-detail' style="background-image: url(${imgUrl});" data-aue-prop="bannerimage" data-aue-label="Main Image" data-aue-type="media" >
+                <p data-aue-prop="cftitle" data-aue-label="Title" data-aue-type="text" class='cftitle'>${
                   cfReq?.title
                 }</p>
                 <p data-aue-prop="cfsubtitle" data-aue-label="SubTitle" data-aue-type="text" class='cfsubtitle'>${
