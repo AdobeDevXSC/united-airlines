@@ -14,7 +14,7 @@ export default async function decorate(block) {
     EXCLUDED_THEME_KEYS: new Set(['brandSite', 'brandLogo'])
   };
 	
-	const hostname = getMetadata('hostname');	
+	const hostname = getMetadata('hostname') || 'https://author-p128727-e1256870.adobeaemcloud.com';	
   const aemauthorurl = getMetadata('authorurl') || '';
 	
   const aempublishurl = hostname?.replace('author', 'publish')?.replace(/\/$/, '');  
